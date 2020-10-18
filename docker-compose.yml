@@ -1,0 +1,51 @@
+version: '3'
+services:
+  rmq-node1:
+    image: test_rmq:latest
+    container_name: rmq-node1
+    hostname: rmq-node1.local
+    environment:
+      RABBITMQ_DIST_PORT: 25672
+    expose:
+      - 25672
+      - 5672
+      - 5671
+    networks:
+      cluster:
+  rmq-node2:
+    image: test_rmq:latest
+    container_name: rmq-node2
+    hostname: rmq-node2.local
+    environment:
+      RABBITMQ_DIST_PORT: 25672
+    expose:
+      - 25672
+      - 5672
+      - 5671
+    networks:
+      cluster:
+  rmq-node3:
+    image: test_rmq:latest
+    container_name: rmq-node3
+    hostname: rmq-node3.local
+    environment:
+      RABBITMQ_DIST_PORT: 25672
+    expose:
+      - 25672
+      - 5672
+      - 5671
+    networks:
+      cluster:
+  client-node:
+    image: centos:7
+    container_name: client-node
+    hostname: client-node
+    volumes:
+      - /Users/halisede/go/src/amqping:/amqping
+    command: /bin/sleep infinity
+    networks:
+      cluster:
+
+
+networks:
+  cluster:
